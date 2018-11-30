@@ -40,6 +40,18 @@ Player.prototype.update = function() {
          this.x = 200;
          this.y = 380;
      }
+     // check for collisions
+     for (key in allEnemies) {
+         let enemyX = Math.floor(allEnemies[key].x);
+         let enemyY = Math.floor(allEnemies[key].y);
+        if (enemyX-75 <= this.x && this.x <= enemyX+75 && 
+            (enemyY-10 <= this.y && this.y <=enemyY+10)) {
+            console.log("collision found player", this.x, this.y);
+            console.log("collision found enemy", key, allEnemies[key]);
+            this.x = 200;
+            this.y = 380;
+        }
+     }
 };
 
 Player.prototype.render = function() {
@@ -54,23 +66,21 @@ Player.prototype.handleInput = function(input) {
         case 'up'   : this.y -= 20; break;
         case 'down' : this.y += 20; break;
     }
-    console.log(this.x, this.y);
+    console.log(this.x, this.y, allEnemies);
 };
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [];
-
-// player initial location
-player = new Player(200, 380);
-
 const getRandomX = () => Math.floor(Math.random() * 400) - 399;
-
+const allEnemies = [];
 allEnemies.push(new Enemy(getRandomX(),60));
 allEnemies.push(new Enemy(getRandomX(),145));
 allEnemies.push(new Enemy(getRandomX(),230));
+
+// player initial location
+player = new Player(200, 380);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
