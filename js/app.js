@@ -1,7 +1,9 @@
 // Enemies our player must avoid
-const Enemy = function() {
+const Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
+    this.x = x;
+    this.y = y;
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -14,6 +16,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x > 500 ? getRandomX() : this.x + 50 * dt;
+    //console.log(this.x);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -24,7 +28,9 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-const Player = function() {
+const Player = function(x, y) {
+    this.x = x;
+    this.y = y;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -33,11 +39,11 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.render = function() {
-
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(input) {
-
+    console.log(input);
 };
 
 
@@ -46,10 +52,13 @@ Player.prototype.handleInput = function(input) {
 // Place the player object in a variable called player
 const allEnemies = [];
 
-const enemy = new Enemy();
-const player = new Player();
+player = new Player(200, 380);
 
-allEnemies.push(enemy);
+const getRandomX = () => Math.floor(Math.random() * 400) - 399;
+
+allEnemies.push(new Enemy(getRandomX(),60));
+allEnemies.push(new Enemy(getRandomX(),145));
+allEnemies.push(new Enemy(getRandomX(),230));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
