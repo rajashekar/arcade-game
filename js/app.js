@@ -35,7 +35,11 @@ const Player = function(x, y) {
 };
 
 Player.prototype.update = function() {
-
+     // on touch of water go to start position
+     if(this.y<=0) {
+         this.x = 200;
+         this.y = 380;
+     }
 };
 
 Player.prototype.render = function() {
@@ -44,6 +48,13 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(input) {
     console.log(input);
+    switch(input) {
+        case 'left' : this.x -= 20; break;
+        case 'right': this.x += 20; break;
+        case 'up'   : this.y -= 20; break;
+        case 'down' : this.y += 20; break;
+    }
+    console.log(this.x, this.y);
 };
 
 
@@ -52,6 +63,7 @@ Player.prototype.handleInput = function(input) {
 // Place the player object in a variable called player
 const allEnemies = [];
 
+// player initial location
 player = new Player(200, 380);
 
 const getRandomX = () => Math.floor(Math.random() * 400) - 399;
