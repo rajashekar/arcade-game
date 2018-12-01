@@ -1,16 +1,19 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor(x, y, speed) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = speed;
     this.width = 75;
     this.height = 10;
     this.sprite = 'images/enemy-bug.png';
   }
 
+  randomSpeed() {
+    return (Math.floor(Math.random() * 5) + 1) * 100; 
+  }
+
   update(dt) {
-    this.x = this.x > 500 ? getRandomX() : this.x + this.speed * dt;
+    this.x = this.x > 500 ? getRandomX() : this.x + this.randomSpeed() * dt;
     this.checkCollisions();
   }
 
@@ -84,10 +87,9 @@ class Player {
 // Place the player object in a variable called player
 const getRandomX = () => Math.floor(Math.random() * 300) - 299;
 const allEnemies = [];
-const enemySpeed = 200;
-allEnemies.push(new Enemy(getRandomX(), 60, enemySpeed));
-allEnemies.push(new Enemy(getRandomX(), 145, enemySpeed));
-allEnemies.push(new Enemy(getRandomX(), 230, enemySpeed));
+allEnemies.push(new Enemy(getRandomX(), 60));
+allEnemies.push(new Enemy(getRandomX(), 145));
+allEnemies.push(new Enemy(getRandomX(), 230));
 
 // player initial location
 player = new Player(200, 380);
