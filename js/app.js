@@ -51,9 +51,12 @@ class Player {
       this.y = 380;
   }
 
-  // on touch of water go to start position
+  // on touch of water 
+  // message game won
+  //go to start position
   resetOnTouchWater() {
     if (this.y <= 0) {
+      alert("You won");
       this.startPosition();
     }
   }
