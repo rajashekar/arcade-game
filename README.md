@@ -1,20 +1,37 @@
-# Classic Arcade Game Clone Project
+# Arcade Game Project
+This Project is done as part of Udacity Front end Web developer course. The purpose of the project is to understand the concepts of  object-oriented programming in Javascript.
 
 ## Table of Contents
 
 - [Instructions](#instructions)
+- [How to play](#how-to-play)
+- [Demo](#demo)
 - [Contributing](#contributing)
 
 ## Instructions
+To clone this repository
+```
+git clone https://github.com/rajashekar/arcade-game.git
+```
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+Go to arcade-game directory
+```
+cd arcade-game
+```
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+Open `index.html` in any browser (drag and drop index.html in browser)
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
+## How to play
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+- To win the game the player needs to get to water avoiding enemies.
+- Use keyboard (left, up, right, down) keys - :arrow_left: :arrow_up: :arrow_right: :arrow_down: to move the player.
+- If player gets hit by enemies :bug:, position will be reset to start position. 
+- If player reaches the water, you won the game :thumbsup:
+
+## Demo
+
+![Demo](arcade_game_demo.gif)
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository is done as part of Udacity Front end Web developer Arcade Game project. Therefore, we most likely will not accept pull requests.

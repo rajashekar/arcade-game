@@ -1,5 +1,8 @@
-// Enemies our player must avoid
+/**
+ * Enemy class - player should avoid enemy objects
+ */
 class Enemy {
+  // set any initial params for enemy object
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -8,44 +11,50 @@ class Enemy {
     this.sprite = 'images/enemy-bug.png';
   }
 
+  // give random speed
   randomSpeed() {
     return (Math.floor(Math.random() * 5) + 1) * 100; 
   }
 
+  // update enemy position with random speed
   update(dt) {
     this.x = this.x > 500 ? getRandomX() : this.x + this.randomSpeed() * dt;
+    // check for collisions
     this.checkCollisions();
   }
 
-  // check for collisions
+  // check if player is in colliding range
   checkCollisions() { 
     if (this.x - this.width <= player.x && player.x <= this.x + this.width &&
       (this.y - this.height <= player.y && player.y <= this.y + this.height)) {
-        console.log("collision found player", player.x, player.y);
-        console.log("collision found enemy", this.x, this.y);
+        // if so send player to start position
         player.startPosition();
     }
   }
 
+  // to render enemy image
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 }
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+/**
+ * Player class - used to create player object
+ */
 class Player {
+  // set any initial params for enemy object
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
   }
 
+  // updates the player position
   update() {
     this.resetOnTouchWater();
   }
 
+  // start position for player
   startPosition() {
       this.x = 200;
       this.y = 380;
@@ -53,7 +62,7 @@ class Player {
 
   // on touch of water 
   // message game won
-  //go to start position
+  // go to start position
   resetOnTouchWater() {
     if (this.y <= 0) {
       alert("You won");
@@ -61,10 +70,12 @@ class Player {
     }
   }
 
+  // to render player image
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
+  // move player based on keyboard up, down, left & right arrows
   handleInput(input) {
     console.log(input);
     switch (input) {
@@ -81,14 +92,13 @@ class Player {
         this.y >= 440 ? this.y = 440 : this.y += 20;
         break;
     }
-    console.log(this.x, this.y, allEnemies);
   }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// get random positions for enemy
 const getRandomX = () => Math.floor(Math.random() * 300) - 299;
+
+// placing 3 enemy objects at random positions
 const allEnemies = [];
 allEnemies.push(new Enemy(getRandomX(), 60));
 allEnemies.push(new Enemy(getRandomX(), 145));
