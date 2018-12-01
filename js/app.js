@@ -1,13 +1,27 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor(x, y) {
+  constructor(x, y, speed) {
     this.x = x;
     this.y = y;
+    this.speed = speed;
+    this.width = 75;
+    this.height = 10;
     this.sprite = 'images/enemy-bug.png';
   }
 
   update(dt) {
-    this.x = this.x > 500 ? getRandomX() : this.x + 50 * dt;
+    this.x = this.x > 500 ? getRandomX() : this.x + this.speed * dt;
+    this.checkCollisions();
+  }
+
+  // check for collisions
+  checkCollisions() { 
+    if (this.x - this.width <= player.x && player.x <= this.x + this.width &&
+      (this.y - this.height <= player.y && player.y <= this.y + this.height)) {
+        console.log("collision found player", player.x, player.y);
+        console.log("collision found enemy", this.x, this.y);
+        player.startPosition();
+    }
   }
 
   render() {
@@ -27,29 +41,17 @@ class Player {
 
   update() {
     this.resetOnTouchWater();
-    this.checkCollisions();
+  }
+
+  startPosition() {
+      this.x = 200;
+      this.y = 380;
   }
 
   // on touch of water go to start position
   resetOnTouchWater() {
     if (this.y <= 0) {
-      this.x = 200;
-      this.y = 380;
-    }
-  }
-
-  // check for collisions
-  checkCollisions() {
-    for (let key in allEnemies) {
-      let enemyX = Math.floor(allEnemies[key].x);
-      let enemyY = Math.floor(allEnemies[key].y);
-      if (enemyX - 75 <= this.x && this.x <= enemyX + 75 &&
-        (enemyY - 10 <= this.y && this.y <= enemyY + 10)) {
-        console.log("collision found player", this.x, this.y);
-        console.log("collision found enemy", key, allEnemies[key]);
-        this.x = 200;
-        this.y = 380;
-      }
+      this.startPosition();
     }
   }
 
@@ -80,11 +82,12 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const getRandomX = () => Math.floor(Math.random() * 400) - 399;
+const getRandomX = () => Math.floor(Math.random() * 300) - 299;
 const allEnemies = [];
-allEnemies.push(new Enemy(getRandomX(), 60));
-allEnemies.push(new Enemy(getRandomX(), 145));
-allEnemies.push(new Enemy(getRandomX(), 230));
+const enemySpeed = 200;
+allEnemies.push(new Enemy(getRandomX(), 60, enemySpeed));
+allEnemies.push(new Enemy(getRandomX(), 145, enemySpeed));
+allEnemies.push(new Enemy(getRandomX(), 230, enemySpeed));
 
 // player initial location
 player = new Player(200, 380);
