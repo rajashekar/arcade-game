@@ -61,16 +61,16 @@ class Player {
     console.log(input);
     switch (input) {
       case 'left':
-        this.x -= 20;
+        this.x <= -20 ? this.x = -20 : this.x -= 20;
         break;
       case 'right':
-        this.x += 20;
+        this.x >= 420 ? this.x = 420 : this.x += 20;
         break;
       case 'up':
         this.y -= 20;
         break;
       case 'down':
-        this.y += 20;
+        this.y >= 440 ? this.y = 440 : this.y += 20;
         break;
     }
     console.log(this.x, this.y, allEnemies);
