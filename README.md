@@ -1,5 +1,5 @@
 # Arcade Game Project
-This Project is done as part of Udacity Front end Web developer course. The purpose of the project is to understand the concepts of  object-oriented programming in Javascript.
+The purpose of the project is to understand the concepts of  object-oriented programming in Javascript.
 
 ## Table of Contents
 
